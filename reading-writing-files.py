@@ -8,7 +8,8 @@
 # Let's say we have a text file containing current visitors at a hotel.  We'll call it, *guests.txt*.  Run the following code to create the file.  The file will automatically populate with each initial guest's first name on its own line.
 
 # In[1]:
-
+import csv
+import os
 
 guests = open("guests.txt", "w")
 initial_guests = ["Bob", "Andrea", "Manuel", "Polly", "Khalid"]
@@ -110,3 +111,79 @@ with open("guests.txt", "r") as guests:
 			print("{} is not checked in".format(check))
 
 # We can see that Bob is checked in while Andrea is not.  Nice work! You've learned the basics of reading and writing files in Python!
+
+# print(new_directory("PythonPrograms", "script.py"))
+
+
+users = [{"name": "Morten Noerregaard", "username": "Wtrekker", "department": "IT"}]
+keys = ["name", "username", "department"]
+with open("by_department.csv", "w") as by_department:
+	writer = csv.DictWriter(by_department, fieldnames=keys)
+	writer.writeheader()
+	writer.writerows(users)
+
+
+# Create a file with data in it
+def create_file(filename):
+	with open(filename, "w") as file:
+		file.write("name,color,type\n")
+		file.write("carnation,pink,annual\n")
+		file.write("daffodil,yellow,perennial\n")
+		file.write("iris,blue,perennial\n")
+		file.write("poinsettia,red,perennial\n")
+		file.write("sunflower,yellow,annual\n")
+
+
+# Read the file contents and format the information about each row
+def contents_of_file(filename):
+	return_string = ""
+
+	# Call the function to create the file
+	create_file(filename)
+
+	# Open the file
+	with open(filename, "r") as filename:
+		# Read the rows of the file into a dictionary
+		reader = csv.DictReader(filename)
+		# Process each item of the dictionary
+		for row in reader:
+			return_string += "a {} {} is {}\n".format(row["color"], row["name"], row["type"])
+	return return_string
+
+
+# Call the function
+print(contents_of_file("flowers.csv"))
+
+
+# Create a file with data in it
+def create_file(filename):
+	with open(filename, "w") as file:
+		file.write("name,color,type\n")
+		file.write("carnation,pink,annual\n")
+		file.write("daffodil,yellow,perennial\n")
+		file.write("iris,blue,perennial\n")
+		file.write("poinsettia,red,perennial\n")
+		file.write("sunflower,yellow,annual\n")
+
+
+# Read the file contents and format the information about each row
+def contents_of_file(filename):
+	return_string = ""
+
+	# Call the function to create the file
+	create_file(filename)
+
+	# Open the file
+	with open(filename, "r") as filename:
+		# Read the rows of the file
+		rows = csv.DictReader(filename)
+		# Process each row
+		for row in rows:
+			# Format the return string for data rows only
+
+			return_string += "a {} {} is {}\n".format(row["color"], row["name"], row["type"])
+	return return_string
+
+
+# Call the function
+print(contents_of_file("flowers.csv"))
